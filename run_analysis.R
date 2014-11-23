@@ -105,10 +105,12 @@ names(Data1) <- gsub("Body", "Body_", names(Data1))
 
 #### Part #4 Ends -  Appropriately labels the data set with descriptive activity names #####
 
-#### Part #5 Starts -  Creates a second, independent tidy data set with the average of each variable for each activity and each subject #####
+#### Part #5 Starts -  Creates a second, independent tidy data set with the average of each variable
+# for each activity and each subject #####
 library(plyr)
 Data1 <- aggregate(. ~subject + activity, data = Data1, FUN=mean)
 Data1 <- Data1[order(Data2$subject, Data2$activity), ]
 write.table(Data1, file = "tidydata.txt",row.name=FALSE)
 
-#### Part #5 Ends -  Creates a second, independent tidy data set with the average of each variable for each activity and each subject #####
+#### Part #5 Ends -  Creates a second, independent tidy data set with the average of each variable
+# for each activity and each subject #####
