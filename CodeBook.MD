@@ -19,7 +19,7 @@ Finally a Fast Fourier Transform (FFT) was applied to some of these signals prod
 These signals were used to estimate variables of the feature vector for each pattern:  
 '-XYZ' is used to denote 3-axial signals in the X, Y and Z directions.
 I've renamed the original signals for readability. 
-
+```
 time_Body_Accelerometer_
 time_GravityAccelerometer_
 time_Body_Accelerometer_Jerk
@@ -37,15 +37,15 @@ frequency_Body_Accelerometer_Magnitude_
 frequency_Body_Body_Accelerometer_JerkMagnitude_
 frequency_Body_Body_Gyroscope_Magnitude_
 frequency_Body_Body_Gyroscope_JerkMagnitude_
-
+```
 The set of variables that were estimated, and included in the tidydata.txt file, from these signals are: 
-
+``
 mean(): Mean value
 std(): Standard deviation
-
+``
 
 The complete list of variables (of each Column) vector is:
-
+```
 "time_Body_Accelerometer_-mean()-X"
 "time_Body_Accelerometer_-mean()-Y"
 "time_Body_Accelerometer_-mean()-Z"
@@ -112,3 +112,4 @@ The complete list of variables (of each Column) vector is:
 "frequency_Body_Body_Gyroscope_Magnitude_-std()"
 "frequency_Body_Body_Gyroscope_JerkMagnitude_-mean()"
 "frequency_Body_Body_Gyroscope_JerkMagnitude_-std()"
+```
