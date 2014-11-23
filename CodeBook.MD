@@ -59,7 +59,7 @@ I've replace the string "Gyro" with "Gyroscope_"
 I've replace the string "Mag" with "Magnitude_"
 I've replace the string "Body" with "Body_"
 ```
-**5. Creating a second, independent tidy data set with the average of each variable for each activity and each subject
+**5. Creating a second, independent tidy data set with the average of each variable for each activity and each subject**
 
 5.1 I used aggregate() from the plyr library to aggregate the data by the mean per subject and activity
 
