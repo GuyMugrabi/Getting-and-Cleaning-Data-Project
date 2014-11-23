@@ -5,11 +5,7 @@
 ## 4. Appropriately labels the data set with descriptive activity names.
 ## 5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
-
-
-
 #### Task #1 Start -  Merging the training and the test sets to create one data set #####
-
 # If you want the script to run change the working directory 
 # into your working directory. This is mine:
 setwd("D:\\R\\CleaningData")
@@ -44,7 +40,6 @@ files
 ####################################################################
 
 ##Read data from the files into the variables
-
 # Read the Activity files
 activityTest  <- read.table(file.path(path, "test" , "Y_test.txt" ),header = FALSE)
 activityTrain <- read.table(file.path(path, "train", "Y_train.txt"),header = FALSE)
@@ -74,15 +69,12 @@ names(features) <- featuresNames$V2
 combined <- cbind(subjects, activities)
 Data <- cbind(combined, features)
 # "Data" now holds all the data from the tables.
-
-
-
 #### Task #1 End -  Merging the training and the test sets to create one data set #####
 
 #### Task #2 Start -  Extracting only the measurements on the mean and standard deviation for each measurement #####
-
 # Subsetting the list of feature names if they have "mean()" or "std()" string in them. 
-# I realized that if I use the RegEx "mean|std" I get columns like "angle(tBodyGyroMean,gravityMean)" or "fBodyBodyGyroMag-meanFreq()"
+# I realized that if I use the RegEx "mean|std" I get columns like "angle(tBodyGyroMean,gravityMean)" 
+# or "fBodyBodyGyroMag-meanFreq()"
 subFeaturesNames <- featuresNames$V2[grep("mean\\(\\)|std\\(\\)", featuresNames$V2)]
 
 # Converting the factor vector into character vector that we will use to subset "Data"
@@ -93,20 +85,17 @@ str(Data1)
 #### Part #2 End -  Extracting only the measurements on the mean and standard deviation for each measurement #####
 
 #### Part #3 Starts -  Use descriptive activity names to name the activities in the data set #####
-
 # Reading descriptive activity names from “activity_labels.txt”
 activityNames <- read.table(file.path(path, "activity_labels.txt"),header = FALSE)
 
 # facorizing Variale activity in the data frame Data1 using the descriptive activity names
 Data1$activity <- activityNames[Data1$activity, 2]
 
-
 #### Part #3 Ends -  Use descriptive activity names to name the activities in the data set #####
 
 #### Part #4 Starts -  Appropriately labels the data set with descriptive activity names #####
-
-#using "gsub()" for pattern matching and replacement of parrtial words with full words for better understanding of variables meaning
-
+# using "gsub()" for pattern matching and replacement of parrtial words with full words for 
+# better understanding of variables meaning
 names(Data1) <- gsub("^t", "time_", names(Data1))
 names(Data1) <- gsub("^f", "frequency_", names(Data1))
 names(Data1) <- gsub("Acc", "Accelerometer_", names(Data1))
@@ -120,7 +109,6 @@ names(Data1) <- gsub("Body", "Body_", names(Data1))
 library(plyr)
 Data1 <- aggregate(. ~subject + activity, data = Data1, FUN=mean)
 Data1 <- Data1[order(Data2$subject, Data2$activity), ]
-
 write.table(Data1, file = "tidydata.txt",row.name=FALSE)
 
 #### Part #5 Ends -  Creates a second, independent tidy data set with the average of each variable for each activity and each subject #####
