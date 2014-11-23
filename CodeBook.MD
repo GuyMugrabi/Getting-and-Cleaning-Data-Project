@@ -1,7 +1,10 @@
 CodeBook for the tidy dataset
 =============================
+The first two columns:
+```
 "subject" - the subject ID
 "activity" - A friendly name of the activity each subject took
+```
 
 Feature Selection 
 -----------------
