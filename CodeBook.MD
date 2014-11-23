@@ -1,67 +1,114 @@
 CodeBook for the tidy dataset
 =============================
-
-Data source
------------
-This dataset is derived from the "Human Activity Recognition Using Smartphones Data Set" which was originally made avaiable here: 
-http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
-Here are the data for the project: 
-https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
+"subject" - the subject ID
+"activity" - A friendly name of the activity each subject took
 
 Feature Selection 
 -----------------
 I refer you to the README and features.txt files in the original dataset to learn more about the feature selection for this dataset. 
 
-The code that can be found in run_analysis.R file in this repository does the following in 5 steps:
+Feature Selection included in the tidydata.txt file
+===================================================
 
-**1. Meging the training and tests data sets (total of 6 files) into one big data frame.**
+The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain signals (prefix 't' to denote time) were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz. 
 
-1.1 The code first extracts the zip file found at "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip" into the working directory, this will give you a folder named "UCI HAR Dataset" with sub directories and files.
-```
-The files that will be used to load data are listed as follows
-- test/subject_test.txt
-- train/subject_train.txt
-- test/X_test.txt
-- train/X_train.txt
-- test/y_test.txt
-- train/y_train.txt
+Subsequently, the body linear acceleration and angular velocity were derived in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). Also the magnitude of these three-dimensional signals were calculated using the Euclidean norm (tBodyAccMag, tGravityAccMag, tBodyAccJerkMag, tBodyGyroMag, tBodyGyroJerkMag). 
 
-Values of the Variable "Activity" consist of data from “Y_train.txt” and “Y_test.txt”
-Values of Variable "Subject" consist of data from “subject_train.txt” and "subject_test.txt"
-Values of Variables "Features" consist of data from “X_train.txt” and “X_test.txt”
-Names of Variable "Features" come from “features.txt”
-levels of Variable "Activity" come from “activity_labels.txt”
-```
-1.1 I started with reading all of the 6 files above into variables
+Finally a Fast Fourier Transform (FFT) was applied to some of these signals producing fBodyAcc-XYZ, fBodyAccJerk-XYZ, fBodyGyro-XYZ, fBodyAccJerkMag, fBodyGyroMag, fBodyGyroJerkMag. (Note the 'f' to indicate frequency domain signals). 
 
-1.2 I used rbind() to create 3 new tables with rows of the test and train data tables per activity, subject and features
+These signals were used to estimate variables of the feature vector for each pattern:  
+'-XYZ' is used to denote 3-axial signals in the X, Y and Z directions.
+I've renamed the original signals for readability. 
 
-1.3 I set the names to the column names using the features.txt file that holds the code and the name of the 561! features
+time_Body_Accelerometer_
+time_GravityAccelerometer_
+time_Body_Accelerometer_Jerk
+time_Body_Gyroscope_
+time_Body_Gyroscope_Jerk
+time_Body_Accelerometer_Magnitude_
+time_GravityAccelerometer_Magnitude_
+time_Body_Accelerometer_JerkMagnitude_
+time_Body_Gyroscope_Magnitude_
+time_Body_Gyroscope_JerkMagnitude_
+frequency_Body_Accelerometer_
+frequency_Body_Accelerometer_Jerk
+frequency_Body_Gyroscope_
+frequency_Body_Accelerometer_Magnitude_
+frequency_Body_Body_Accelerometer_JerkMagnitude_
+frequency_Body_Body_Gyroscope_Magnitude_
+frequency_Body_Body_Gyroscope_JerkMagnitude_
 
-1.4 I've merged the columns of the 3 tables I've created to get the data frame "Data" for all data in two steps
+The set of variables that were estimated, and included in the tidydata.txt file, from these signals are: 
 
-**2. Extracting only the measurements on the mean and standard deviation for each measurement**
+mean(): Mean value
+std(): Standard deviation
 
-2.1 Subsetting the list of feature names (columns of "Data" that I've created in step 1 above) to include only the column names that have "mean()" or "std()" string in them. 
 
-**3. Use descriptive activity names to name the activities in the data set**
-3.1 Reading descriptive activity names from “activity_labels.txt”
+The complete list of variables (of each Column) vector is:
 
-3.2 facorizing Variale activity in the data frame Data1 using the descriptive activity names
-
-**4. Appropriately label the data set with descriptive variable names**
-4.1 using "gsub()" for pattern matching and replacement of parrtial words with full words for better understanding of variables meaning
-```
-For column name that starts with the letter "t", I've replaced the letter "t" with the string "time_" 
-For column name that starts with the letter "f", I've replaced the letter "f" with the string  "frequency_"
-I've replace the string "Acc" with "Accelerometer_"
-I've replace the string "Gyro" with "Gyroscope_"
-I've replace the string "Mag" with "Magnitude_"
-I've replace the string "Body" with "Body_"
-```
-**5. Creating a second, independent tidy data set with the average of each variable for each activity and each subject**
-
-5.1 I used aggregate() from the plyr library to aggregate the data by the mean per subject and activity
-
-5.2 I've created a new tidydata.txt file using the write.table() function
-
+"time_Body_Accelerometer_-mean()-X"
+"time_Body_Accelerometer_-mean()-Y"
+"time_Body_Accelerometer_-mean()-Z"
+"time_Body_Accelerometer_-std()-X"
+"time_Body_Accelerometer_-std()-Y"
+"time_Body_Accelerometer_-std()-Z"
+"time_GravityAccelerometer_-mean()-X"
+"time_GravityAccelerometer_-mean()-Y"
+"time_GravityAccelerometer_-mean()-Z"
+"time_GravityAccelerometer_-std()-X"
+"time_GravityAccelerometer_-std()-Y"
+"time_GravityAccelerometer_-std()-Z"
+"time_Body_Accelerometer_Jerk-mean()-X"
+"time_Body_Accelerometer_Jerk-mean()-Y"
+"time_Body_Accelerometer_Jerk-mean()-Z"
+"time_Body_Accelerometer_Jerk-std()-X"
+"time_Body_Accelerometer_Jerk-std()-Y"
+"time_Body_Accelerometer_Jerk-std()-Z"
+"time_Body_Gyroscope_-mean()-X"
+"time_Body_Gyroscope_-mean()-Y"
+"time_Body_Gyroscope_-mean()-Z"
+"time_Body_Gyroscope_-std()-X"
+"time_Body_Gyroscope_-std()-Y"
+"time_Body_Gyroscope_-std()-Z"
+"time_Body_Gyroscope_Jerk-mean()-X"
+"time_Body_Gyroscope_Jerk-mean()-Y"
+"time_Body_Gyroscope_Jerk-mean()-Z"
+"time_Body_Gyroscope_Jerk-std()-X"
+"time_Body_Gyroscope_Jerk-std()-Y"
+"time_Body_Gyroscope_Jerk-std()-Z"
+"time_Body_Accelerometer_Magnitude_-mean()"
+"time_Body_Accelerometer_Magnitude_-std()"
+"time_GravityAccelerometer_Magnitude_-mean()"
+"time_GravityAccelerometer_Magnitude_-std()"
+"time_Body_Accelerometer_JerkMagnitude_-mean()"
+"time_Body_Accelerometer_JerkMagnitude_-std()"
+"time_Body_Gyroscope_Magnitude_-mean()"
+"time_Body_Gyroscope_Magnitude_-std()"
+"time_Body_Gyroscope_JerkMagnitude_-mean()"
+"time_Body_Gyroscope_JerkMagnitude_-std()"
+"frequency_Body_Accelerometer_-mean()-X"
+"frequency_Body_Accelerometer_-mean()-Y"
+"frequency_Body_Accelerometer_-mean()-Z"
+"frequency_Body_Accelerometer_-std()-X"
+"frequency_Body_Accelerometer_-std()-Y"
+"frequency_Body_Accelerometer_-std()-Z"
+"frequency_Body_Accelerometer_Jerk-mean()-X"
+"frequency_Body_Accelerometer_Jerk-mean()-Y"
+"frequency_Body_Accelerometer_Jerk-mean()-Z"
+"frequency_Body_Accelerometer_Jerk-std()-X"
+"frequency_Body_Accelerometer_Jerk-std()-Y"
+"frequency_Body_Accelerometer_Jerk-std()-Z"
+"frequency_Body_Gyroscope_-mean()-X"
+"frequency_Body_Gyroscope_-mean()-Y"
+"frequency_Body_Gyroscope_-mean()-Z"
+"frequency_Body_Gyroscope_-std()-X"
+"frequency_Body_Gyroscope_-std()-Y"
+"frequency_Body_Gyroscope_-std()-Z"
+"frequency_Body_Accelerometer_Magnitude_-mean()"
+"frequency_Body_Accelerometer_Magnitude_-std()"
+"frequency_Body_Body_Accelerometer_JerkMagnitude_-mean()"
+"frequency_Body_Body_Accelerometer_JerkMagnitude_-std()"
+"frequency_Body_Body_Gyroscope_Magnitude_-mean()"
+"frequency_Body_Body_Gyroscope_Magnitude_-std()"
+"frequency_Body_Body_Gyroscope_JerkMagnitude_-mean()"
+"frequency_Body_Body_Gyroscope_JerkMagnitude_-std()"
