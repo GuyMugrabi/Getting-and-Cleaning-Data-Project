@@ -12,10 +12,9 @@ Feature Selection
 -----------------
 I refer you to the README and features.txt files in the original dataset to learn more about the feature selection for this dataset. 
 
+The description of the variables in tidydata.txt can be found in the file CodeBook.MD in this repository
 
-The description of the variables in tidydata.txt can be found in the file Codebook.MD
-
-The code that can be found in run_analysis.R file in this repository creates the file tidydata.txt and does that in the following 5 steps:
+The code that can be found in run_analysis.R file in this repository creates the file tidydata.txt (that is also included in this repository) from data that can be found originialy in 8 files, and does that in the following 5 steps:
 
 **1. Meging the training and tests data sets (total of 6 files) into one big data frame.**
 
