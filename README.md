@@ -47,11 +47,13 @@ levels of Variable "Activity" come from “activity_labels.txt”
 2.1 Subsetting the list of feature names (columns of "Data" that I've created in step 1 above) to include only the column names that have "mean()" or "std()" string in them. 
 
 **3. Use descriptive activity names to name the activities in the data set**
+
 3.1 Reading descriptive activity names from “activity_labels.txt”
 
 3.2 facorizing Variale activity in the data frame Data1 using the descriptive activity names
 
 **4. Appropriately label the data set with descriptive variable names**
+
 4.1 using "gsub()" for pattern matching and replacement of parrtial words with full words for better understanding of variables meaning
 ```
 For column name that starts with the letter "t", I've replaced the letter "t" with the string "time_" 
@@ -66,4 +68,3 @@ I've replace the string "Body" with "Body_"
 5.1 I used aggregate() from the plyr library to aggregate the data by the mean per subject and activity
 
 5.2 I've created a new tidydata.txt file using the write.table() function
-
