@@ -12,7 +12,7 @@ Feature Selection
 -----------------
 I refer you to the README and features.txt files in the original dataset to learn more about the feature selection for this dataset. 
 
-The code that can be fouund in run_analysis.R file in this repository does the following in 5 steps:
+The code that can be found in run_analysis.R file in this repository does the following in 5 steps:
 
 **1. Meging the training and tests data sets (total of 6 files) into one big data frame.**
 
